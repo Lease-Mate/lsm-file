@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1.0.0
+      author: fpamula
+      changes:
+        - createTable:
+            tableName: image
+            columns:
+              - column:
+                  name: id
+                  type: char(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: content
+                  type: blob
+                  constraints:
+                    nullable: false
+              - column:
+                  name: extension
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: offer_image
+            columns:
+              - column:
+                  name: offer_id
+                  type: char(36)
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: image_id
+                  type: char(36)
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: order_no
+                  type: int
+                  constraints:
+                    nullable: false
