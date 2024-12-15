@@ -1,5 +1,6 @@
 package com.lsm.ws.file.context.image;
 
+import com.lsm.ws.file.context.image.dto.IdWrapperDto;
 import com.lsm.ws.file.context.image.dto.ImageIdDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -53,9 +54,9 @@ public class ImageEndpoint {
 
     @PostMapping(value = "/offer/{offerId}/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = ADD_IMAGE, description = ADD_IMAGE_DESC)
-    public ResponseEntity<String> addImage(@PathVariable String offerId,
-                                           @RequestPart("file") MultipartFile file) throws IOException {
+    public ResponseEntity<IdWrapperDto> addImage(@PathVariable String offerId,
+                                                 @RequestPart("file") MultipartFile file) throws IOException {
         var id = imageService.addImage(offerId, file);
-        return ResponseEntity.ok(id);
+        return ResponseEntity.ok(IdWrapperDto.fromId(id));
     }
 }
