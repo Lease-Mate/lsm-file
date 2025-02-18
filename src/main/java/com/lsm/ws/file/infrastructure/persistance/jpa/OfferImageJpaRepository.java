@@ -8,4 +8,6 @@ import java.util.List;
 public interface OfferImageJpaRepository extends JpaRepository<OfferImageEntity, String> {
 
     List<OfferImageEntity> findByOfferId(String offerId);
+
+    void deleteByImageId(String imageId);
 }

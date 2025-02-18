@@ -50,4 +50,11 @@ public class OfferImageFacadeRepository implements ImageRepository {
                                       .stream().map(OfferImageEntity::toOfferImage)
                                       .toList();
     }
+
+    @Override
+    @Transactional
+    public void delete(OfferImage image) {
+        offerImageJpaRepository.deleteByImageId(image.imageId());
+        imageJpaRepository.deleteById(image.imageId());
+    }
 }

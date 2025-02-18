@@ -10,4 +10,6 @@ public interface ImageRepository {
     Optional<Image> getById(String imageId);
 
     List<OfferImage> getByOfferId(String offerId);
+
+    void delete(OfferImage image);
 }

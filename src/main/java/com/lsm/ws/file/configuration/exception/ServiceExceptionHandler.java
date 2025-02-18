@@ -24,14 +24,13 @@ public class ServiceExceptionHandler {
     @ExceptionHandler(ValidationException.class)
     ResponseEntity<ErrorCodeResponse> handleValidationException(ValidationException exception, WebRequest webRequest) {
         LOGGER.info("HTTP 400 - Invalid request {} CODE: {} reason: {}",
-                webRequest.getDescription(false), exception.code(), exception.getMessage());
+                    webRequest.getDescription(false), exception.code(), exception.getMessage());
         var responseBody = new ErrorCodeResponse(exception.code(), exception.getMessage());
         return new ResponseEntity<>(responseBody, BAD_REQUEST);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    ResponseEntity<ErrorResponse> handleValidationException(MethodArgumentNotValidException exception,
-                                                            WebRequest webRequest) {
+    ResponseEntity<ErrorResponse> handleValidationException(MethodArgumentNotValidException exception) {
         var cause = exception.getBindingResult().getAllErrors().get(0);
         var message = cause.getDefaultMessage();
         if (cause instanceof FieldError) {

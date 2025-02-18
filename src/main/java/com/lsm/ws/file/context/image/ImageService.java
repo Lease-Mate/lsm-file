@@ -59,4 +59,13 @@ public class ImageService {
         images.sort(Comparator.comparing(OfferImage::order));
         return images;
     }
+
+    public void delete(String offerId, String imageId) {
+        var image = imageRepository.getByOfferId(offerId)
+                                   .stream().filter(it -> it.imageId().equals(imageId))
+                                   .findFirst()
+                                   .orElseThrow(NoSuchImageException::new);
+
+        imageRepository.delete(image);
+    }
 }
